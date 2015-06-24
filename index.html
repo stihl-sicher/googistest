@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+<title>Unbenanntes Dokument</title>
+<link rel="stylesheet" href="desktop.css" media="(min-width: 851px)">
+<link rel="stylesheet" href="mobile.css" media="(max-width: 851px)">
+<script src="jquery-2.1.4.min.js" ></script>
+<script type="text/javascript">
+	var timer = null;
+	$(function() {
+	
+		function closeOverlays() {
+			$("#Hauptnavigation").hide("slow");
+			$("#Login").hide("slow");
+		}
+		
+		function closeAllMenu() {
+			$("#Hauptnavigation li .submenu").css("display","none");
+		}	
+		
+		if ($(window).width() < 851) {
+			
+			$("#menuButton").click(function() {
+					if ($("#Hauptnavigation").css("display") == "none") {
+						closeOverlays();
+						var offset = $("#Hauptnavigation").css("top").substr(0,2);
+						var t = $(window).height()-offset;
+						$("#Hauptnavigation").css("height",t+"px");
+						$("#Hauptnavigation").show("slow");
+					} else {
+						closeOverlays();
+					}
+				});
+		
+			$("#loginButton").click(function() {
+					if ($("#Login").css("display") == "none") {
+						closeOverlays();
+						var offset = $("#Login").css("top").substr(0,2);
+						var t = $(window).height()-offset-40;
+						$("#Login").css("height",t+"px");
+						$("#Login").show("slow");
+					} else {
+						closeOverlays();
+					}
+				});
+		} else {
+			$("#Hauptnavigation").children().hover(function() {
+					clearTimeout(timer);
+					closeAllMenu();
+					var elm = $(this).attr("alt");
+					$("#Hauptnavigation > li."+elm+" > .submenu").css("display","inline-block");
+				},
+				function() {
+					timer = setTimeout(closeAllMenu,200);
+				});
+		}
+	});
+
+	
+</script>
+</head>
+
+<body>
+<div id="page">
+<div id="head">
+	<div class="mobileButton" id="loginButton" title="Login">&nbsp;</div>
+	<div class="mobileButton" id="menuButton" title="Navigation">&nbsp;</div>
+	<div id="Login"><label>Benutzer</label><input type=text /> <label>Passwort</label><input type=password /> <input type=submit value="Login" /></div>
+	<ul id="Hauptnavigation">
+    	<li class="menu1" alt="menu1"><a href="#">Der Verein</a><ul class="submenu"><li>Über uns</li><li>Der Vorstand</li><li>Mitgliedschaft<ul class="submenu"><li>Satzung</li><li>Aufnahmeantrag</li><li>Beiträge</li></ul></li><li>Spenden</li></ul></li>
+    	<li class="menu2" alt="menu2"><a href="#">Mantrailing</a><ul class="submenu"><li>Was ist Mantrailing?</li><li>Equipment</li><li><nobr>Mantrailing vs. Fährten</nobr></li></ul></li>
+    	<li class="menu3" alt="menu3"><a href="#">Termine</a><ul class="submenu"><li>Seminare</li><li>Training</li><li>Wanderungen</li></ul></li>
+    	<li class="menu4" alt="menu4"><a href="#">Kontakt</a><ul class="submenu"><li>Email</li><li>Impressum</li></ul></li>
+    </ul>
+   	<div id="logo"><a href="front_content.php"><img src="bmt_logo.png" alt="Logo Brownys Mantrailer" title="Brownys Mantrailer" /></a></div>
+</div>
+<div id="Unternavigation"><div class="aktiveKategorie">Termine</div>
+<ul class="Unternavigation">
+	<li>Seminare</li>
+    <li>Training
+    	<ul>
+        	<li>Termine</li>
+            <li>Impressionen</li>
+        </ul>
+    </li>
+    <li>Wanderungen</li>
+</ul>
+</div>
+<div id="Inhalt">
+	<div class="mobileButton mobileButtonBig" id="mapOpenButton" title="Karte">&nbsp;</div>
+	<div class="mobileButton mobileButtonBig" id="catOpenButton" title="Erkunden">&nbsp;</div>
+	
+</div>
+
+
+</div>
+</body>
+</html>
