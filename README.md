@@ -1,0 +1,2 @@
+# googistest
+GooGIS-Teststarter
